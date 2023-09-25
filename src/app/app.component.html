@@ -26,14 +26,13 @@
       Ver info. polígono
     </button>
   </div>
-
+  
   <div>
     <div >
-
+     
 
       <map-info-window>
-        <div *ngIf="showInfo" class="info-window-container">
-
+        <div #infoWindowContent *ngIf="showInfo" class="info-window-container">
           <h2>{{infoContent?.title}}</h2>
           <div class="temperature">
             <h4>Temperatura</h4><span>{{infoContent?.temperature}}°</span>

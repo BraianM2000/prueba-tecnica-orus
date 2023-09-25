@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { GoogleMap, MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataService } from 'src/service/data.service';
@@ -25,8 +25,7 @@ export class AppComponent implements OnInit {
   isWindowOpen: boolean = false
   @ViewChild(MapInfoWindow, { static: false }) infoWindow!: MapInfoWindow
   @ViewChild(GoogleMap, { static: false }) map!: GoogleMap | undefined;
-  @ViewChild('customButton', { read: ElementRef }) customButtonRef!: ElementRef;
-
+  @ViewChild('button', { static: false }) buttonElem: any
   infoContent!: any;
   infoContentCopy: any;
   polygonDraw!: google.maps.Polygon;
@@ -41,7 +40,7 @@ export class AppComponent implements OnInit {
   });
   polygonMarkers: Array<any> = [];
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService, private renderer: Renderer2) {
 
   }
   ngOnInit(): void {
@@ -61,118 +60,118 @@ export class AppComponent implements OnInit {
     this.infoContentCopy = JSON.parse(JSON.stringify(content));
     this.infoContent = content
     this.infoWindow.open(marker);
+}
+
+changeInfoView() {
+  this.infoContent = JSON.parse(JSON.stringify(this.infoContentCopy));
+  this.showInfo = !this.showInfo
+}
+
+refreshMarkers() {
+  this.dataService.getValidators().subscribe((data: any) => {
+    this.apiData = data
+    this.addMarker()
+  })
+}
+
+toggleAddForm() {
+  this.showAddForm = !this.showAddForm
+}
+
+toggleMode() {
+  this.layoutMode = !this.layoutMode
+  if (this.layoutMode) {
+    window.alert('Para dibujar un poligono añade vertices haciendo click en cualquier lugar del mapa')
   }
+}
 
-  changeInfoView() {
-    this.infoContent = JSON.parse(JSON.stringify(this.infoContentCopy));
-    this.showInfo = !this.showInfo
+onMapClick(event: google.maps.MapMouseEvent): void {
+  if(event.latLng && this.layoutMode) {
+  const lat = event.latLng.toJSON().lat;
+  const lng = event.latLng.toJSON().lng;
+
+
+  this.polygonVertices.push({ lat, lng });
+  this.myPolygon.setPaths(this.polygonVertices)
+
+}
   }
+deletPolygon() {
+  this.polygonVertices = []
 
-  refreshMarkers() {
-    this.dataService.getValidators().subscribe((data: any) => {
-      this.apiData = data
-      this.addMarker()
-    })
+  if (this.map?.googleMap) {
+    this.polygonDraw.setPaths(this.polygonVertices);
   }
-
-  toggleAddForm() {
-    this.showAddForm = !this.showAddForm
-  }
-
-  toggleMode() {
-    this.layoutMode = !this.layoutMode
-    if(this.layoutMode){
-      window.alert('Para dibujar un poligono añade vertices haciendo click en cualquier lugar del mapa')
-    }
-  }
-
-  onMapClick(event: google.maps.MapMouseEvent): void {
-    if (event.latLng && this.layoutMode) {
-      const lat = event.latLng.toJSON().lat;
-      const lng = event.latLng.toJSON().lng;
+}
 
 
-      this.polygonVertices.push({ lat, lng });
-      this.myPolygon.setPaths(this.polygonVertices)
+showPolygonInfo() {
+  this.polygonMarkers = [];
+  if (this.polygonVertices.length > 2) {
+    this.markers.forEach(marker => {
+      const markerPosition = new google.maps.LatLng(
+        marker.position.lat,
+        marker.position.lng
+      );
 
-    }
-  }
-  deletPolygon() {
-    this.polygonVertices = []
+      const isMarkerInPolygon = google.maps.geometry.poly.containsLocation(
+        markerPosition,
+        this.polygonDraw
+      );
 
-    if (this.map?.googleMap) {
-      this.polygonDraw.setPaths(this.polygonVertices);
-    }
-  }
-
-
-  showPolygonInfo() {
-    this.polygonMarkers = [];
-    if (this.polygonVertices.length > 2) {
-      this.markers.forEach(marker => {
-        const markerPosition = new google.maps.LatLng(
-          marker.position.lat,
-          marker.position.lng
-        );
-
-        const isMarkerInPolygon = google.maps.geometry.poly.containsLocation(
-          markerPosition,
-          this.polygonDraw
-        );
-
-        if (isMarkerInPolygon) {
-          this.polygonMarkers.push(marker);
-        }
-      });
-    }
-    this.isWindowOpen = true
-  }
-
-  toggleWindow(event: any) {
-    this.isWindowOpen = event.value
-  }
-  closeInfoWindow() {
-    this.showInfo = false
-  }
-  moveMap(event: google.maps.MapMouseEvent) {
-    if (!this.layoutMode) {
-      if (event.latLng != null) this.center = (event.latLng.toJSON());
-    }
-  }
-  move(event: google.maps.MapMouseEvent) {
-    if (event.latLng != null) this.display = event.latLng.toJSON();
-  }
-
-  markerOptions: google.maps.MarkerOptions = {
-    draggable: false
-  };
-  markerPositions: google.maps.LatLngLiteral[] = [];
-
-  addMarker() {
-    this.markers = []
-    this.apiData?.map(marker => {
-      var temperature = marker.temperature;
-      var iconColor;
-      if (temperature < 15) {
-        iconColor = '../assets/svg/icon-blue.svg';
-      } else if (temperature < 25) {
-        iconColor = '../assets/svg/icon-green.svg';
-      } else {
-        iconColor = '../assets/svg/icon-red.svg';
+      if (isMarkerInPolygon) {
+        this.polygonMarkers.push(marker);
       }
-      this.markers.push({
-        id: marker.id,
-        position: {
-          lat: marker.latitude,
-          lng: marker.longitude
-        },
-        title: marker.ubication,
-        temperature: marker.temperature,
-        client: marker.client,
-        icon: iconColor
-      });
-    })
-
+    });
   }
+  this.isWindowOpen = true
+}
+
+toggleWindow(event: any) {
+  this.isWindowOpen = event.value
+}
+closeInfoWindow() {
+  this.showInfo = false
+}
+moveMap(event: google.maps.MapMouseEvent) {
+  if (!this.layoutMode) {
+    if (event.latLng != null) this.center = (event.latLng.toJSON());
+  }
+}
+move(event: google.maps.MapMouseEvent) {
+  if (event.latLng != null) this.display = event.latLng.toJSON();
+}
+
+markerOptions: google.maps.MarkerOptions = {
+  draggable: false
+};
+markerPositions: google.maps.LatLngLiteral[] = [];
+
+addMarker() {
+  this.markers = []
+  this.apiData?.map(marker => {
+    var temperature = marker.temperature;
+    var iconColor;
+    if (temperature < 15) {
+      iconColor = '../assets/svg/icon-blue.svg';
+    } else if (temperature < 25) {
+      iconColor = '../assets/svg/icon-green.svg';
+    } else {
+      iconColor = '../assets/svg/icon-red.svg';
+    }
+    this.markers.push({
+      id: marker.id,
+      position: {
+        lat: marker.latitude,
+        lng: marker.longitude
+      },
+      title: marker.ubication,
+      temperature: marker.temperature,
+      client: marker.client,
+      icon: iconColor
+    });
+  })
+
+}
 
 }
