@@ -1,68 +1,62 @@
 @import url('https://fonts.googleapis.com/css2?family=Mulish&display=swap');
 
-
-
 .mat-icon {
     right: 9px;
     bottom: 9px;
     font-size: 24px;
     position: relative;
-}
-.delete-button {
+  }
+  .delete-button {
     left: 170px;
     position: relative;
     width: 30px;
     height: 30px;
-}
-
-
-
-.station-form-container {
+  }
+  .station-form-container {
     background-color: #fff;
     padding: 20px;
     border-radius: 25px;
     font-family: 'Mulish';
     overflow: hidden;
-    .add-form {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        .marker-input {
-            display: flex;
-            flex-direction: column;
-            font-size: 14px;
-            color:  #1C3A4C;
-            gap: 10px;
-            label {
-                color:  #1C3A4C;
-                font-size: 18px;
-                font-weight: 500;
-            }
-
-            input{
-                border: solid 2px #b5b5b5;
-                border-radius: 25px;
-                height: 25px;
-                width: 200px;
-            }
-          
-        }
-        button{
-            width: 100px;
-            height: 35px;
-            font-size: 14px;
-            color: white;
-            border: solid 1px ;
-            border-radius: 25px;
-            cursor: pointer;
-            border-color: linear-gradient(to right, #1C3A4C, #1D5A7E);;
-        }
-        .submit{
-            background: linear-gradient(to right, #1C3A4C, #1D5A7E);
-        }
-        .cancel{
-            background-color: white;
-            color: #1C3A4C
-        }
-    }
-}
+  }
+  .station-form-container .add-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .station-form-container .add-form .marker-input {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    color: #1C3A4C;
+    gap: 10px;
+  }
+  .station-form-container .add-form .marker-input label {
+    color: #1C3A4C;
+    font-size: 18px;
+    font-weight: 500;
+  }
+  .station-form-container .add-form .marker-input input {
+    border: solid 2px #b5b5b5;
+    border-radius: 25px;
+    height: 25px;
+    width: 200px;
+  }
+  .station-form-container .add-form button {
+    width: 100px;
+    height: 35px;
+    font-size: 14px;
+    color: white;
+    border: solid 1px;
+    border-radius: 25px;
+    cursor: pointer;
+    border-color: linear-gradient(to right, #1C3A4C, #1D5A7E);
+  }
+  .station-form-container .add-form .submit {
+    background: linear-gradient(to right, #1C3A4C, #1D5A7E);
+  }
+  .station-form-container .add-form .cancel {
+    background-color: white;
+    color: #1C3A4C;
+  }
+  

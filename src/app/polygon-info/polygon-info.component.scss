@@ -1,40 +1,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Mulish&display=swap');
-
 * {
     font-family: 'Mulish';
-}
-
-.window {
+  }
+  .window {
     margin: 20px;
     display: flex;
     flex-direction: column;
-    .close-window{
-        background-color: transparent;
-        color: red;
-        border: none;
-        font-size: 18px;
-        position: relative;
-        width: 20px;
-        left: 260px;
-    }
-    .temperature {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .clients {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    h3 {
-        color: #1C3A4C;
-        font-size: 18px;
-    }
-
-    span {
-        color: #25C1E4;
-    }
-}
+  }
+  .window .close-window {
+    background-color: transparent;
+    color: red;
+    border: none;
+    font-size: 18px;
+    position: relative;
+    width: 20px;
+    left: 260px;
+  }
+  .window .temperature {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .window .clients {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .window h3 {
+    color: #1C3A4C;
+    font-size: 18px;
+  }
+  .window span {
+    color: #25C1E4;
+  }
+  
