@@ -2,6 +2,16 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.3.
 
+##Descripción
+
+La aplicación consiste principalmente en un mapa en el cual se pueden agregar nuevos puntos con información como nombre y temperatura.
+
+La aplicación esta desarrollada haciendo uso de la libreria @angular google maps y desplegada en firebase.
+
+##Link de la página desplegada.
+
+[https://prueba-orus.web.app](Link a la web)
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
