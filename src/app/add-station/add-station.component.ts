@@ -45,7 +45,7 @@ export class AddStationComponent {
       }
     })
   }else{
-    console.log(this.form)
+    this.form.markAllAsTouched();
   }
   }
   onCancel() {
