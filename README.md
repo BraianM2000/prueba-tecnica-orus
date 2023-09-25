@@ -10,7 +10,7 @@ La aplicación esta desarrollada haciendo uso de la libreria @angular google map
 
 ##Link de la página desplegada.
 
-[https://prueba-orus.web.app](Link a la web)
+([Link a la web](https://prueba-orus.web.app))
 
 ## Development server
 
