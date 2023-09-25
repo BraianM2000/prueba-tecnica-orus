@@ -1,0 +1,48 @@
+<div class="station-form-container">
+    <div class="button-container">
+        <button class="delete-button" mat-icon-button (click)="onDelete()" [disabled]="isDeleting">
+          <mat-icon [style.color]="isDeleting ? '#edadb9' : '#ff0030'">delete_outline</mat-icon>
+        </button>
+      </div>
+      
+
+    <form class="update-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="marker-input">
+            <label for="name">Nombre</label>
+            <input type="text" id="name" formControlName="name" >
+            <div class="error-message" *ngIf="form.get('name')?.invalid && form.get('name')?.touched">
+              El nombre es requerido.
+            </div>
+          </div>
+          
+          <div class="marker-input">
+            <label for="temperature">Temperatura</label>
+            <input type="number" id="temperature" formControlName="temperature" >
+            <div class="error-message" *ngIf="form.get('temperature')?.invalid && form.get('temperature')?.touched" >
+              Ingrese una temperatura válida.
+            </div>
+          </div>
+          
+          <div class="marker-input">
+            <label for="latitude">Latitud</label>
+            <input type="number" id="latitude" formControlName="latitude" >
+            <div class="error-message" *ngIf="form.get('latitude')?.invalid && form.get('latitude')?.touched">
+              Ingrese una latitud válida.
+            </div>
+          </div>
+          
+          <div class="marker-input">
+            <label for="longitude">Longitud</label>
+            <input type="number" id="longitude" formControlName="longitude"  >
+            <div class="error-message" *ngIf="form.get('longitude')?.invalid && form.get('longitude')?.touched">
+              Ingrese una longitud válida.
+            </div>
+          </div>
+          
+          <div class="buttons">
+            <button class="submit" type="submit" [disabled]="form.invalid">Guardar</button>
+            <button class="cancel" type="button" (click)="onCancel()">Cancelar</button>
+          </div>
+      
+    </form>
+</div>

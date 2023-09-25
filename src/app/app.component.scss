@@ -1,0 +1,209 @@
+@import url("https://fonts.googleapis.com/css2?family=Mulish&display=swap");
+
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: "Mulish";
+}
+
+header {
+    font-size: 35px;
+    font-weight: 600;
+    background: linear-gradient(to right, #1C3A4C, #1D5A7E);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    padding: 10px;
+}
+
+.info-window-container {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    width: 200px;
+    max-width: 400px;
+
+    h2 {
+        color: #383a3a;
+        font-size: 24px;
+    }
+
+    h4 {
+        color: #1c4156;
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    .ubication {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 13px;
+    }
+
+    .temperature {
+        display: flex;
+        justify-content: space-between;
+
+        span {
+            color: #25C1E4;
+            font-size: 18px;
+        }
+    }
+
+    ul {
+        list-style: none;
+        padding: 0px;
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+    }
+
+    .edit-button {
+        width: 62%;
+        height: 35px;
+        position: relative;
+        left: 85px;
+        font-size: 14px;
+        background: linear-gradient(to right, #1c3a4c, #1d5a7e);
+        color: white;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+    }
+}
+
+.marker-form {
+    display: flex;
+}
+
+.marker-blue {
+    background-color: blue;
+}
+
+.marker-green {
+    background-color: green;
+}
+
+.marker-red {
+    background-color: red;
+}
+
+::ng-deep .gm-ui-hover-effect {
+    display: none !important;
+}
+
+.add-form-container {
+    position: absolute;
+    top: 130px;
+    right: 3px;
+    z-index: 9999;
+
+    img {
+        height: 60px;
+    }
+
+    app-add-station {
+        position: absolute;
+        right: 0px;
+        top: 80px;
+    }
+
+    .add-button {
+        bottom: 90vh;
+        left: 50vh;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+    }
+}
+
+span {
+    color: #25C1E4;
+}
+
+.toggle-mode-container {
+    position: absolute;
+    top: 200px;
+    right: 3px;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    img {
+        height: 60px;
+    }
+
+    app-add-station {
+        position: absolute;
+        right: 0px;
+        top: 80px;
+    }
+
+    .add-button {
+        bottom: 90vh;
+        left: 50vh;
+        background-color: white;
+
+        border: none;
+        cursor: pointer;
+    }
+
+    .circular-button {
+        border: none;
+        border-radius: 50%;
+        background-color: #007BFF;
+        color: white;
+        font-size: 12px;
+        width: 40px;
+        height: 40px;
+        font-size: 10px;
+        cursor: pointer;
+        margin-right: 1%;
+        height: 70px;
+        width: 70px;
+    }
+
+
+    .draw-button {
+        background-color: #007BFF;
+    }
+
+    .layout-button {
+        background-color: #DC3545;
+    }
+
+    .info-button {
+        background-color: #28A745;
+    }
+}
+
+.polygon-info-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Fondo semitransparente */
+    display: flex;
+    justify-content: center;
+    /* Centra horizontalmente */
+    align-items: center;
+    /* Centra verticalmente */
+    z-index: 9999;
+
+    .card {
+        height: 400px;
+        width: 300px;
+        background-color: white;
+        overflow-y: auto;
+        border-radius: 25px;
+        padding: 0px 10px;
+    }
+}

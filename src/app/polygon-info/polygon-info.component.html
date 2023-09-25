@@ -1,0 +1,18 @@
+<div class="window">
+    <button class="close-window" (click)="closeWindow()">X</button>
+
+    <h3>Marcadores dentro del Polígono:</h3>
+    <ul>
+        <li *ngFor="let marker of markers">
+            <strong>{{ marker.title }}</strong>
+
+        </li>
+
+    </ul>
+    <div class="temperature">
+        <h3>Temperatura promedio: </h3> <span>{{averageTemperature}}</span>
+    </div>
+    <div class="clients">
+        <h3>Número de clientes: </h3><span>{{markers.length}}</span>
+    </div>
+</div>

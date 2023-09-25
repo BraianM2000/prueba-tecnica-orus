@@ -1,0 +1,70 @@
+<header>Prueba Técnica</header>
+<google-map height="100vh" width="100%" [center]="center" [zoom]="zoom" (mapClick)="moveMap($event)"
+  (mapMousemove)="move($event)" (mapClick)="onMapClick($event)">
+
+
+  <map-marker #markerElem="mapMarker" *ngFor="let marker of markers" [position]="marker.position" [label]="marker.label"
+    [title]="marker.title" [options]="marker.options" [icon]="marker.icon"
+    (mapClick)="openInfoWindow(markerElem, marker)">
+  </map-marker>
+  <div class="add-form-container">
+    <button class="add-button" (click)="toggleAddForm()">
+      <img src="../assets/svg/add-station.svg" alt="svg">
+    </button>
+
+    <app-add-station *ngIf="showAddForm" (refreshMarkers)="refreshMarkers()"
+      (showAddForm)="toggleAddForm()"></app-add-station>
+  </div>
+  <div class="toggle-mode-container">
+    <button class="add-button draw-button circular-button" (click)="toggleMode()">
+      cambiar a modo vista/dibujo
+    </button>
+    <button *ngIf="layoutMode" class="add-button layout-button circular-button" (click)="deletPolygon()">
+      Borrar polígono
+    </button>
+    <button *ngIf="layoutMode" class="add-button info-button circular-button" (click)="showPolygonInfo()">
+      Ver info. polígono
+    </button>
+  </div>
+
+  <div>
+    <div style="position: relative;">
+
+
+      <map-info-window>
+        <div *ngIf="showInfo" class="info-window-container">
+
+          <h2>{{infoContent?.title}}</h2>
+          <div class="temperature">
+            <h4>Temperatura</h4><span>{{infoContent?.temperature}}°</span>
+          </div>
+
+          <hr>
+          <div class="ubication">
+            <h4>Ubicación</h4>
+            <ul>
+              <li>
+                Latitud <span>{{infoContent?.position.lat}}</span>
+              </li>
+              <li>
+                Longitud <span>{{infoContent?.position.lng}}</span>
+              </li>
+            </ul>
+          </div>
+          <button class="edit-button" (click)="changeInfoView()">Editar información</button>
+        </div>
+
+        <div *ngIf="!showInfo" class="edit-info-container ">
+          <app-update-station [formData]="infoContent" (refreshMarkers)="refreshMarkers()"
+            (showInfo)="changeInfoView()"></app-update-station>
+        </div>
+      </map-info-window>
+    </div>
+  </div>
+</google-map>
+<div *ngIf="isWindowOpen" class="polygon-info-container">
+  <div class="card">
+    <app-polygon-info (isWindowOpen)="toggleWindow($event)" [markers]="polygonMarkers"></app-polygon-info>
+  </div>
+
+</div>
