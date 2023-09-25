@@ -59,6 +59,7 @@ export class AppComponent implements OnInit {
     this.showInfo = true
     this.infoContentCopy = JSON.parse(JSON.stringify(content));
     this.infoContent = content
+    this.dataService.setContent(content)
     this.infoWindow.open(marker);
 }
 
@@ -124,6 +125,7 @@ showPolygonInfo() {
       }
     });
   }
+  this.dataService.setSelectedMarkers(this.polygonMarkers)
   this.isWindowOpen = true
 }
 

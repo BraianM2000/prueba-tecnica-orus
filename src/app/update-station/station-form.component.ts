@@ -10,7 +10,6 @@ import { DataService } from 'src/service/data.service';
 
 
 export class UpdateStateComponent implements OnInit {
-  @Input() formData: any;
   @Output() showInfo: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() refreshMarkers: EventEmitter<void> = new EventEmitter<void>();
 
@@ -29,7 +28,9 @@ export class UpdateStateComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    this.infoContent = this.formData
+    this.dataService.getContent().subscribe(data=>{
+      this.infoContent = data
+    })
     this.form.get('name')?.setValue(this.infoContent.title);
     this.form.get('temperature')?.setValue(this.infoContent.temperature);
     this.form.get('latitude')?.setValue(this.infoContent.position.lat);
@@ -38,6 +39,7 @@ export class UpdateStateComponent implements OnInit {
 
 
   onSubmit() {
+    if (this.form.valid) {
     const newData = {
       ubication: this.form.value.name,
       temperature: this.form.value.temperature,
@@ -52,6 +54,9 @@ export class UpdateStateComponent implements OnInit {
         console.error(error);
       }
     })
+  }else{
+    this.form.markAllAsTouched();
+  }
   }
   onCancel() {
     this.showInfo.emit(true);

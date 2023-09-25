@@ -54,7 +54,7 @@
         </div>
 
         <div *ngIf="!showInfo" class="edit-info-container ">
-          <app-update-station [formData]="infoContent" (refreshMarkers)="refreshMarkers()"
+          <app-update-station (refreshMarkers)="refreshMarkers()"
             (showInfo)="changeInfoView()"></app-update-station>
         </div>
       </map-info-window>
@@ -63,7 +63,7 @@
 </google-map>
 <div *ngIf="isWindowOpen" class="polygon-info-container">
   <div class="card">
-    <app-polygon-info (isWindowOpen)="toggleWindow($event)" [markers]="polygonMarkers"></app-polygon-info>
+    <app-polygon-info (isWindowOpen)="toggleWindow($event)" ></app-polygon-info>
   </div>
 
 </div>
