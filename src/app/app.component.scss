@@ -168,3 +168,16 @@
     padding: 0px 10px;
   }
   
+  .container {
+    position: relative;
+  }
+
+  .external-button {
+    position: absolute;
+    top: 20px; 
+    right: 20px;
+  }
+
+  .edit-info-container{
+    width: 209px;
+  }

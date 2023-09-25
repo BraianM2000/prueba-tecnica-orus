@@ -25,7 +25,9 @@ export class AppComponent implements OnInit {
   isWindowOpen: boolean = false
   @ViewChild(MapInfoWindow, { static: false }) infoWindow!: MapInfoWindow
   @ViewChild(GoogleMap, { static: false }) map!: GoogleMap | undefined;
-  @ViewChild('button', { static: false }) buttonElem: any
+  @ViewChild('infoWindowContent', { static: false }) infoWindowContent!: ElementRef;
+  @ViewChild('externalButton', { static: false }) externalButton!: ElementRef;
+
   infoContent!: any;
   infoContentCopy: any;
   polygonDraw!: google.maps.Polygon;

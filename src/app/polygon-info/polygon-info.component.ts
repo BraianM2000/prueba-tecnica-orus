@@ -8,8 +8,6 @@ import { DataService } from 'src/service/data.service';
   styleUrls: ['./polygon-info.component.scss']
 })
 
-
-
 export class PolygonInfoComponent implements OnInit {
   @Output() isWindowOpen: EventEmitter<boolean> = new EventEmitter<boolean>
   totalTemperature: number = 0
